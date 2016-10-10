@@ -4,8 +4,8 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
 
     $scope.heading = "GitHub Viewer";
-    $scope.username = ""; //default username ->nothing
-
+    $scope.username = "angular"; //default username ->nothing
+    $scope.repoSortOrder = "";
 
     $scope.search = function(username) {
         $http.get("https://api.github.com/users/" + username)
