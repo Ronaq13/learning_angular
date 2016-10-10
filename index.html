@@ -21,19 +21,20 @@
         //This just dont have form validation  ng-click replaced by ng-submit
         -->
         <h3 style="center">{{username}}</h3>
-        <div>
+*      <div ng-show="user">    <!-- if user exists then this content is shown -->
             <br> Name: {{user.name}}
             <br> Location: {{user.location}}
             <br>
             <img src="{{user.avatar_url}}" title="{{user.name}}" alt="user's profile image'">
+            Order :
+            <select ng-model="repoSortOrder">
+                <option default value="+name">Name</option>
+                <option value="-stargazers_count">Stars</option>
+                <option value="+language">Language</option>
+            </select>
         </div>
-        Order :
-        <select ng-model="repoSortOrder">
-            <option default value="+name">Name</option>
-            <option value="-stargazers_count">Stars</option>
-            <option value="+language">Language</option>
-        </select>
-        <div>
+        
+  *      <div ng-hide="!user">  
             <table>
                 <thead>
                     <tr>
@@ -43,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="repo in repos | orderBy: repoSortOrder">
+                    <tr ng-repeat="repo in repos | orderBy: repoSortOrder">   <!-- orderBy is a filter -->
                         <!-- act like a for-each loop -->
                         <td>{{repo.name}}</td>
                         <td>{{repo.stargazers_count | number}}</td>
