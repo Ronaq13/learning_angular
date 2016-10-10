@@ -1,11 +1,7 @@
 var app = angular.module('myApp', []);
 
 // 1st controller
-app.controller('myCtrl', function($scope, $http) {
-
-    $scope.heading = "GitHub Viewer";
-    $scope.username = "angular"; //default username ->nothing
-    $scope.repoSortOrder = "";
+app.controller('myCtrl', function($scope, $http, $interval) {
 
     $scope.search = function(username) {
         $http.get("https://api.github.com/users/" + username)
@@ -26,4 +22,20 @@ app.controller('myCtrl', function($scope, $http) {
         $scope.errorMessage = "Not able to find this"; //only displayed if function is called
     };
 
+    var decrementCountdown = function() {
+        $scope.countdown -= 1;
+        if ($scope.countdown < 1) {
+            $scope.search($scope.username);
+        }
+    };
+    var startCountdown = function() {
+        $interval(decrementCountdown, 1000, $scope.countdown);
+    };
+
+
+    $scope.heading = "GitHub Viewer";
+    $scope.username = "angular"; //default username ->nothing
+    $scope.repoSortOrder = "";
+    $scope.countdown = 5;
+    startCountdown();
 });
