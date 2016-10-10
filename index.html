@@ -28,6 +28,26 @@
             <img src="{{user.avatar_url}}" title="{{user.name}}" alt="user's profile image'">
         </div>
         <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stars</th>
+                        <th>Language</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="repo in repos">
+                        <!-- act like a for-each loop -->
+                        <td>{{repo.name}}</td>
+                        <td>{{repo.stargazers_count | number}}</td>
+                        <!-- |: pipe symbol ; number: filter -->
+                        <td>{{repo.language}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
             <br> {{errorMessage}}
         </div>
     </div>
